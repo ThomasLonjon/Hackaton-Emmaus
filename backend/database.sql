@@ -39,6 +39,8 @@ COLLATE = utf8mb4_0900_ai_ci;
 CREATE TABLE IF NOT EXISTS `emmaus_db`.`models` (
   `id` INT(11) NOT NULL AUTO_INCREMENT,
   `name` VARCHAR(45) NOT NULL,
+  `brand` VARCHAR(45) NOT NULL,
+  `release_year` INT(11) NOT NULL,
   `picture` VARCHAR(255) NULL DEFAULT NULL,
   PRIMARY KEY (`id`))
 ENGINE = InnoDB
@@ -51,16 +53,14 @@ COLLATE = utf8mb4_0900_ai_ci;
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `emmaus_db`.`evaluation` (
   `id` INT(11) NOT NULL AUTO_INCREMENT,
-  `model` VARCHAR(255) NOT NULL,
-  `release_year` INT(11) NOT NULL,
   `ram` INT(11) NOT NULL,
   `storage` INT(11) NOT NULL,
-  `condition` VARCHAR(45) NOT NULL,
-  `screen_size` VARCHAR(45) NOT NULL,
+`network` VARCHAR(45) NULL DEFAULT NULL,
   `os` VARCHAR(45) NOT NULL,
   `guarantee` TINYINT(4) NULL DEFAULT NULL,
-  `price` FLOAT NOT NULL,
   `charger_in` TINYINT(4) NOT NULL,
+    `condition` VARCHAR(45) NOT NULL,
+   `price` FLOAT NOT NULL,
   `is_sold` TINYINT(4) NOT NULL DEFAULT '0',
   `sale_date` DATE NULL DEFAULT NULL,
   `agency_id` INT(11) NOT NULL,
