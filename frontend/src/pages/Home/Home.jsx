@@ -63,14 +63,10 @@ function Home() {
             </p>
           </div>
           <div className="home-button">
-            <div className="btn-1">
               <button className="home-btn-1" onClick={handleClick}>
                 Ajoutez un smarthphone
               </button>
-            </div>
-            <div className="btn-2">
               <button className="home-btn-2" onClick={handleFindPhone}>Trouvez un smarthphone</button>
-            </div>
           </div>
         </div>
         <div className="emmaus-hand">

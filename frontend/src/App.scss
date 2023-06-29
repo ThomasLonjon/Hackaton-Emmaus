@@ -18,14 +18,12 @@
     width:100px;
       }
       .title-description{
-        margin-left:50px;
         color: #002743;
         font-size: 24px;
         font-family: Poppins;
         font-weight: 600;
       }
       .para-title{
-        margin-left:50px;
         margin-top:20px;
       }
     .hightlight{
@@ -38,7 +36,10 @@
 
        .home-button{
         margin-top:50px;
-        margin-left:100px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+
        }
 
 
