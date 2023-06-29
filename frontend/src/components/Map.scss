@@ -2,8 +2,6 @@
 /*                                          Maps                                          
 /* ------------------------------------------------------------------------------------------------ */
 
-
-
 .map-container-overlay {
   border-radius: 1vw;
   overflow: hidden;
@@ -18,7 +16,7 @@
 }
 
 div.map.mapboxgl-map {
-  height: 110%;
+  height: 100%;
   width: 100%;
 }
 

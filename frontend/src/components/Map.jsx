@@ -5,22 +5,20 @@ import "./Map.scss";
 
 mapboxgl.accessToken = import.meta.env.VITE_MAPBOX_ACCESS_TOKEN;
 
-function Map({ phoneIsChosen }) {
+function Map({ agencies, phoneIsChosen, setClickedAgencyIndex }) {
   const mapContainer = useRef(null);
   const map = useRef(null);
 
-  async function getAgencies() {
+  useEffect(() => {
     const geojson = [];
-
-    try {
-      const response = await fetch("http://localhost:8000/agencies/2");
-      const data = await response.json();
-      data.map((element) =>
+    if (phoneIsChosen) {
+      agencies.map((element) =>
         geojson.push({
           type: "Feature",
+          properties: { index: agencies.indexOf(element) },
           geometry: {
             type: "Point",
-            coordinates: [data[data.indexOf(element)].long, data[data.indexOf(element)].lat],
+            coordinates: [agencies[agencies.indexOf(element)].long, agencies[agencies.indexOf(element)].lat],
           },
         })
       );
@@ -29,10 +27,8 @@ function Map({ phoneIsChosen }) {
         type: "FeatureCollection",
         features: geojson,
       });
-    } catch (err) {
-      console.error(err);
     }
-  }
+  }, [agencies]);
 
   // ---------------------------------------- Add map----------------------------------------
   useEffect(() => {
@@ -44,7 +40,7 @@ function Map({ phoneIsChosen }) {
       container: mapContainer.current,
       style: "mapbox://styles/thomaslonjon/clhgjrlk901d601pg3xxj6p4v",
       center: [2.5152007724586496, 46.60410199308436],
-      zoom: 5.1,
+      zoom: 4.9,
       antialias: true,
     });
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -72,15 +68,28 @@ function Map({ phoneIsChosen }) {
 
       //   map.current.moveLayer("agencies", "country");
     });
+
+    // -------------------------------- popup --------------------------------
+
+    const popup = new mapboxgl.Popup({
+      closeButton: false,
+      closeOnClick: false,
+    });
+
+    map.current.on("click", "agencies", (e) => {
+      const index = e.features[0].properties.index;
+      setClickedAgencyIndex(index);
+    });
+
+    map.current.on("mouseenter", "agencies", () => {
+      map.current.getCanvas().style.cursor = "pointer";
+    });
+
+    // Change it back to a pointer when it leaves.
+    map.current.on("mouseleave", "agencies", () => {
+      map.current.getCanvas().style.cursor = "";
+    });
   }, []);
-
-  // ---------------------------------------- Get Agencies ----------------------------------------
-
-  useEffect(() => {
-    if (phoneIsChosen) {
-      getAgencies();
-    }
-  }, [phoneIsChosen]);
 
   // ---------------------------------------- RETURN----------------------------------------
 
@@ -89,6 +98,4 @@ function Map({ phoneIsChosen }) {
 
 export default Map;
 
-Map.propTypes = {
-  phoneIsChosen: PropTypes.bool.isRequired,
-};
+Map.propTypes = {};
