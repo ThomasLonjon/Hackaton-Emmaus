@@ -34,10 +34,25 @@
         align-items: center;
         font-size: 18px;
         font-weight: 600;
+        cursor: pointer;
         img {
             width: 16px;
             height: 16px;
             margin-right: 8px;
         }
     }
+}
+
+.profile-panel {
+    position: fixed;
+    display: flex;
+    top: 70px;
+    right: 0;
+    width: 150px;
+    background-color: white;
+    a {
+        margin: auto;
+        cursor: pointer;
+    }
+
 }

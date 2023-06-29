@@ -1,33 +1,39 @@
 import React, { useState } from "react";
-import axios from "axios";
+import api from "../../services/api";
 import "./connect.scss";
+import { useEffect } from "react";
+import useStore from "../../store";
 
-function Connect({ setOpenLogin, setLogged }) {
+function Connect({setOpenLogin}) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [error, setError] = useState(null);
+
   const url = import.meta.env.VITE_BACKEND_URL;
 
-  // const handleSubmit = async (e) => {
-  //   e.preventDefault();
-  //   axios
-  //     .post(`${url}/users/login`, {
-  //       email,
-  //       password,
-  //     })
-  //     .then((result) => {
-  //       localStorage.setItem("user", result.data);
-  //       localStorage.setItem("logged", true);
+  const login = (email, password) => {
+    return api.post("http://localhost:8000/users/login", { email, password });
+  };
 
-  //       const logged = localStorage.getItem("logged");
-  //       console.log(logged);
-  //     });
-  // };
+
+  const { auth, setAuth } = useStore();
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      const result = await login(email, password);
+      setAuth({ user: result.data, isLogged: true });
+      setOpenLogin(false)
+    } catch (error) {
+      setError("email ou mot de passe incorrect");
+    }
+  };
 
   return (
     <>
       <div className="Connect-login">
         <div className="login">
-          <form className="form-login">
+          <form className="form-login" onSubmit={handleSubmit}>
             <h3 className="connection">Se connecter</h3>
             <label>
               <p>Identifiant : </p>
@@ -46,14 +52,7 @@ function Connect({ setOpenLogin, setLogged }) {
               />
             </label>
             <div>
-              <button
-                type="submit"
-                className="sub-button"
-                onClick={() => {
-                  setOpenLogin(false);
-                  setLogged(true);
-                }}
-              >
+              <button type="submit" className="sub-button">
                 Valider
               </button>
             </div>

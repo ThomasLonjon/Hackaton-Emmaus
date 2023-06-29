@@ -5,6 +5,8 @@ import "../../App.scss";
 import Connect from "../composant/Connect";
 import Navbar from "../../components/Navbar/Navbar";
 import Navout from "../../components/NavOut/Navout";
+import axios from "axios";
+import useStore from "../../store";
 
 import { useNavigate } from "react-router-dom";
 import { useEffect } from "react";
@@ -12,32 +14,21 @@ import { useEffect } from "react";
 function Home() {
   const navigate = useNavigate();
   const handleClick = () => {
-
     navigate("/evaluation");
   };
 
   const [openLogin, setOpenLogin] = useState(false);
-  const [logged, setLogged] = useState(false);
-  const [userLogged, setUserLogged] = useState(false);
-
-  useEffect(() => {
-    setUserLogged(localStorage.getItem("logged"));
-  }, [logged]);
-
-  useEffect(() => {
-    localStorage.clear();
-  }, []);
-
 
   const handleFindPhone = () => {
-    navigate('/phones')
-  }
+    navigate("/phones");
+  };
+
+  const { auth } = useStore();
+
   return (
     <>
-      {openLogin && (
-        <Connect setOpenLogin={setOpenLogin} setLogged={setLogged} />
-      )}
-      {userLogged ? (
+      {openLogin && <Connect setOpenLogin={setOpenLogin} />}
+      {auth?.isLogged ? (
         <Navbar />
       ) : (
         <Navout setOpenLogin={setOpenLogin} openLogin={openLogin} />
@@ -50,23 +41,26 @@ function Home() {
               L'accès à la technologie
               <br />
               pour tous,
-              <span className="hightlight"> un smarthphone</span>
+              <span className="hightlight"> un smartphone</span>
               <br />à la fois.
             </h1>
           </div>
           <div className="title-paragraphe">
             <p className="para-title">
-              Ensemble nous déterminer à faire une différence dans la vie <br />
-              des personnes exclues en leur offrant des opportunités et des
-              outils nécessaires <br />
-              pour s'épanouir dans le monde de demain{" "}
+              Ensemble, nous sommes déterminés à faire une différence dans la
+              vie <br />
+              des personnes exclues, en leur offrant les opportunités et les
+              outils
+              <br /> nécessaires pour s'épanouir dans le monde numérique.
             </p>
           </div>
           <div className="home-button">
-              <button className="home-btn-1" onClick={handleClick}>
-                Ajoutez un smarthphone
-              </button>
-              <button className="home-btn-2" onClick={handleFindPhone}>Trouvez un smarthphone</button>
+            <button className="home-btn-1" onClick={handleClick}>
+              Ajouter un smartphone
+            </button>
+            <button className="home-btn-2" onClick={handleFindPhone}>
+              Trouver un smartphone
+            </button>
           </div>
         </div>
         <div className="emmaus-hand">

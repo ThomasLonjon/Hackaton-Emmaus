@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import axios from "axios";
+import api from "../../services/api";
 import Filter from "../../components/filters/Filter";
 import "./phones.scss";
 import cross from "../../assets/close.png";
@@ -17,20 +17,16 @@ function Phones() {
     );
   };
 
-  // const handleDelete = (id) => {
-  //   axios.delete('http://localhost:8000/users/')
-  // };
-
 
 
   useEffect(() => {
-    axios
+    api
       .get("http://localhost:8000/users/me")
       .then((result) => console.log(result.data));
   }, []);
 
   useEffect(() => {
-    axios
+    api
       .get("http://localhost:8000/phones")
       .then((result) => setPhones(result.data));
   }, []);

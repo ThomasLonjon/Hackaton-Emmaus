@@ -26,7 +26,7 @@ CREATE TABLE IF NOT EXISTS `emmaus_db`.`agency` (
   `location` VARCHAR(255) NOT NULL,
   `lat` FLOAT NOT NULL,
   `long` FLOAT NOT NULL,
-  `phone_number` INT(11) NOT NULL,
+  `phone_number` VARCHAR(45) NOT NULL,
   PRIMARY KEY (`id`))
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8mb4

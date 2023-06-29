@@ -68,7 +68,7 @@ const login = async (req, res) => {
     if (!user) {
       res.status(403).json("Invalid email");
     } else {
-      const { id, email, password: hash, role, agency_id } = user;
+      const { id, email, password: hash, role, agency_id, firstname, lastname } = user;
       if (await argon.verify(hash, password)) {
         const token = jwt.sign(
           { id: id, role: role, agency_id },
@@ -87,6 +87,8 @@ const login = async (req, res) => {
             id,
             email,
             role,
+            firstname,
+            lastname,
           });
       } else {
         res.status(401).send({
@@ -100,7 +102,7 @@ const login = async (req, res) => {
   }
 };
 
-const logout = (req, res) => {
+const logout = ({ res }) => {
   return res.clearCookie("access_token").sendStatus(200);
 };
 
@@ -150,5 +152,5 @@ module.exports = {
   logout,
   updateUser,
   deleteUser,
-  getCurrentUser
+  getCurrentUser,
 };

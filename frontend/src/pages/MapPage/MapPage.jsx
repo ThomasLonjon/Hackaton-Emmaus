@@ -17,12 +17,21 @@ function MapPage() {
   const [filteredPhonesInAgency, setFilteredPhonesInAgency] = useState([]);
 
   useEffect(() => {
-    axios.get("http://localhost:8000/phones").then((result) => setPhones(result.data));
-    axios.get(`http://localhost:8000/agencies/`).then((result) => setAgencies(result.data));
+    axios
+      .get("http://localhost:8000/phones")
+      .then((result) => setPhones(result.data));
+    axios
+      .get(`http://localhost:8000/agencies/`)
+      .then((result) => setAgencies(result.data));
   }, []);
 
   useEffect(() => {
-    if (filters[0].length === 0 && filters[1].length === 0 && filters[2].length === 0 && filters[3].length === 0) {
+    if (
+      filters[0].length === 0 &&
+      filters[1].length === 0 &&
+      filters[2].length === 0 &&
+      filters[3].length === 0
+    ) {
       setFilteredPhones(phones);
       return;
     }
@@ -67,8 +76,13 @@ function MapPage() {
         filters={filters}
       />
       <div className="map-table-container">
+        <h1>Trouver un smartphone dans le réseau Emmaus</h1>
         <div className="mapContainer">
-          <Map filteredPhones={filteredPhones} setClickedAgencyIndex={setClickedAgencyIndex} phones={phones} />
+          <Map
+            filteredPhones={filteredPhones}
+            setClickedAgencyIndex={setClickedAgencyIndex}
+            phones={phones}
+          />
         </div>
 
         <div className={clickedAgencyIndex ? "info" : "infoHidden"}>
@@ -88,7 +102,9 @@ function MapPage() {
             <th></th>
           </tr>
           {filteredPhonesInAgency
-            .filter((item) => item?.name.toLowerCase().includes(search.toLowerCase()))
+            .filter((item) =>
+              item?.name.toLowerCase().includes(search.toLowerCase())
+            )
             .map((e) => {
               return (
                 <tr>

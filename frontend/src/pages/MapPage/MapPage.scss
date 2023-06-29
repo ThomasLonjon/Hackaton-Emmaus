@@ -3,11 +3,9 @@
 .mapPage {
   padding-top: 70px;
   display: flex;
-  justify-content: space-between;
 }
 
 .mapContainer {
-  margin-right: 4vw;
   width: 70vw;
   height: 68vh;
 }
@@ -29,7 +27,13 @@
 .map-table-container {
   display: flex;
   flex-direction: column;
-  justify-content: space-around;
+  // justify-content: space-around;
+  align-items: center;
+  width: 100%;
+
+  h1 {
+    margin: 32px 0;
+  }
 }
 
 table {
