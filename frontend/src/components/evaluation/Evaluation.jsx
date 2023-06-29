@@ -1,6 +1,7 @@
 import React, { useEffect, useState, useRef } from 'react'
 import "./Evaluation.scss";
 import axios from 'axios'
+import {useNavigate} from 'react-router-dom'
 
 import {os, storage, memory, network, condition, ponderation} from './data'
 
@@ -25,7 +26,7 @@ function Evaluation() {
 
     const url = import.meta.env.VITE_BACKEND_URL
 
-    
+    const navigate = useNavigate()
 
     const brandRef = useRef()
     const modelRef = useRef()
@@ -88,6 +89,10 @@ function Evaluation() {
 
     const handleSubmit = (e) => {
         e.preventDefault()
+        // faire le axios post
+        //...
+
+        navigate('/')
     }
 
   return (
