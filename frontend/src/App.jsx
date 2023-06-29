@@ -1,6 +1,7 @@
 import { Route, Routes } from "react-router-dom";
-import "./App.css";
-import Home from "./pages/Home";
+import "./App.scss";
+import Home from "./pages/Home/Home";
+import MapPage from "./pages/MapPage/MapPage";
 
 function App() {
   return (
@@ -11,6 +12,7 @@ function App() {
         <Route path="/phones" element={<></>}></Route>
         <Route path="/network" element={<></>}></Route>
         <Route path="/dashboard" element={<></>}></Route>
+        <Route path="/map" element={<MapPage />}></Route>
       </Routes>
     </>
   );
