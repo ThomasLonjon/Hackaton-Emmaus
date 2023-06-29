@@ -12,6 +12,7 @@ import { useEffect } from "react";
 function Home() {
   const navigate = useNavigate();
   const handleClick = () => {
+
     navigate("/evaluation");
   };
 
@@ -27,6 +28,10 @@ function Home() {
     localStorage.clear();
   }, []);
 
+
+  const handleFindPhone = () => {
+    navigate('/phones')
+  }
   return (
     <>
       {openLogin && (
@@ -64,7 +69,7 @@ function Home() {
               </button>
             </div>
             <div className="btn-2">
-              <button className="home-btn-2">Trouvez un smarthphone</button>
+              <button className="home-btn-2" onClick={handleFindPhone}>Trouvez un smarthphone</button>
             </div>
           </div>
         </div>

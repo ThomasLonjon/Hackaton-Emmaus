@@ -3,7 +3,7 @@ import "./Evaluation.scss";
 import axios from 'axios'
 import {useNavigate} from 'react-router-dom'
 
-import {os, storage, memory, network, condition, ponderation} from './data'
+import {os, storage, memory, network, condition, ponderation, agency} from './data'
 
 import iphone from '../../assets/iphone.png'
 
@@ -16,11 +16,14 @@ function Evaluation() {
         model: "",
         os: "",
         release_year: "",
-        memory: "",
+        ram: "",
         storage: "",
         network: "",
         condition: "",
+        agency:"",
     })
+
+    
 
     const [price, setPrice] = useState(0)
 
@@ -36,6 +39,7 @@ function Evaluation() {
     const storageRef = useRef()
     const networkRef = useRef()
     const conditionRef = useRef()
+    const agencyRef = useRef()
 
     console.log(ponderation);
 
@@ -73,6 +77,7 @@ function Evaluation() {
 
         const INITIAL_PRICE = 50
         const result = INITIAL_PRICE * ponderation.memory[memoryRef.current.value] * ponderation.storage[storageRef.current.value] * ponderation.release[releaseRef.current.value] * ponderation.condition[conditionRef.current.value] * ponderation.brand[brandRef.current.value]
+
         setPrice(result.toFixed(2))
 
         setSmartphoneObj({
@@ -80,10 +85,11 @@ function Evaluation() {
             model: modelRef.current.value,
             os: osRef.current.value,
             release_year: releaseRef.current.value,
-            memory: memoryRef.current.value,
+            ram: memoryRef.current.value,
             storage: storageRef.current.value,
             network: networkRef.current.value,
             condition: conditionRef.current.value,
+            agency: agencyRef.current.value,
         })
     }
 
@@ -91,8 +97,15 @@ function Evaluation() {
         e.preventDefault()
         // faire le axios post
         //...
+        const {ram, storage, network, os, condition, brand, agency} = smartphoneObj
+        axios.post(`${url}/evaluation`, {ram, storage, network, os, condition, price, brand, agency})
+        .then(res => console.log(res.data))
+        .catch(err => console.log(err))
+        
 
         navigate('/')
+
+        console.log(smartphoneObj, price);
     }
 
   return (
@@ -106,7 +119,7 @@ function Evaluation() {
                 <select name="brand" id="brand" ref={brandRef}>
                     <option value=""></option>
                     {
-                        optionBrand.map((brand, index) => <option key={index} value={brand.brand}> {brand.brand} </option>)
+                        optionBrand.map((brand, index) => <option key={index} value={index+1}> {brand.brand} </option>)
                     }
                 </select>
             </div>
@@ -180,6 +193,15 @@ function Evaluation() {
                             }
                         </select>
                     </div>
+                    <div className="agency select-container">
+                        <label htmlFor="agency"> Agence </label>
+                        <select name="agency" id="agency" ref={agencyRef}>
+                            <option value=""></option>
+                            {
+                                agency.map((a) => <option key={a.id} value={a.id}> {a.name} </option>)
+                            }
+                        </select>
+                    </div>
                 <button className="submit btn" onClick={handleClickToPageThree}>Valider</button>
 
                 </div>
@@ -196,7 +218,7 @@ function Evaluation() {
                     <p className="price">{price} €</p>
                     <div className="specs">
                         <p>Modèle: {smartphoneObj.model}</p>
-                        <p>Ram: {smartphoneObj.memory}Go</p>
+                        <p>Ram: {smartphoneObj.ram}Go</p>
                         <p>Stockage: {smartphoneObj.storage}Go</p>
                         <p>Etat: {smartphoneObj.condition}</p>
                     </div>

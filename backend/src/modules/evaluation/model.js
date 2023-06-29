@@ -6,13 +6,21 @@ const findAllModels = async () => {
 } 
 
 const findAllBrands = async () => {
-    const [brands] = await db.query('SELECT DISTINCT brand FROM models')
+    const [brands] = await db.query('SELECT distinct brand FROM models')
     return brands
 } 
 
-
+const insertEvaluation = async (evaluation) => {
+    const { ram, storage, network, os, condition, price, agency, brand } = evaluation;
+    const [data] = await db.query(
+        "INSERT INTO evaluation (ram, storage, network, os, `condition`, price, agency_id, models_id) VALUES (?, ?, ?, ?, ?, ?, ?, ?)", 
+        [ram, storage, network, os, condition, price, agency, brand]
+    );
+    return data;
+};
 
 module.exports = {
     findAllModels,
-    findAllBrands
+    findAllBrands,
+    insertEvaluation
 }
