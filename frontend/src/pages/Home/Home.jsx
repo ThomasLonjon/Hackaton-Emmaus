@@ -10,6 +10,9 @@ function Home() {
   const handleClick = () => {
     navigate('/evaluation')
   }
+  const handleFindPhone = () => {
+    navigate('/phones')
+  }
   return (
     <>
       <div className="topbar">
@@ -44,7 +47,7 @@ function Home() {
               <button className="home-btn-1" onClick={handleClick}>Ajoutez un smarthphone</button>
             </div>
             <div className="btn-2">
-              <button className="home-btn-2">Trouvez un smarthphone</button>
+              <button className="home-btn-2" onClick={handleFindPhone}>Trouvez un smarthphone</button>
             </div>
           </div>
         </div>

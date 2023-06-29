@@ -103,11 +103,11 @@ export const condition = [
 
 export const ponderation = {
   brand: {
-    Samsung: 1.2,
-    Huawei: 1.05,
-    Apple: 2,
-    Oppo: 1.1,
-    Google: 1.3,
+    1: 1.2,
+    2: 1.05,
+    3: 2,
+    4: 1.1,
+    5: 1.3,
   },
   memory: {
     2: 1.2,
@@ -139,3 +139,18 @@ export const ponderation = {
     2023: 1.5,
   },
 };
+
+export const agency = [
+  {
+    id: 1,
+    name: "Emmaus Leognan Bourg",
+  },
+  {
+    id: 2,
+    name: "Wild Code Emmaus",
+  },
+  {
+    id: 3,
+    name: "Emmaus Buffay",
+  }
+]
