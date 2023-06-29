@@ -3,7 +3,13 @@ import emmaus from "../../images/emmaus.png";
 import hand from "../../images/hand.png";
 import "../../App.scss";
 
+import { useNavigate } from "react-router-dom";
+
 function Home() {
+  const navigate = useNavigate()
+  const handleClick = () => {
+    navigate('/evaluation')
+  }
   return (
     <>
       <div className="topbar">
@@ -35,7 +41,7 @@ function Home() {
           </div>
           <div className="home-button">
             <div className="btn-1">
-              <button className="home-btn-1">Ajoutez un smarthphone</button>
+              <button className="home-btn-1" onClick={handleClick}>Ajoutez un smarthphone</button>
             </div>
             <div className="btn-2">
               <button className="home-btn-2">Trouvez un smarthphone</button>
