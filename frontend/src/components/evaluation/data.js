@@ -140,17 +140,4 @@ export const ponderation = {
   },
 };
 
-export const agency = [
-  {
-    id: 1,
-    name: "Emmaus Leognan Bourg",
-  },
-  {
-    id: 2,
-    name: "Wild Code Emmaus",
-  },
-  {
-    id: 3,
-    name: "Emmaus Buffay",
-  }
-]
+

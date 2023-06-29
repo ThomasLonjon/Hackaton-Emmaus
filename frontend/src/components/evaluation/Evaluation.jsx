@@ -3,15 +3,7 @@ import './Evaluation.scss';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 
-import {
-  os,
-  storage,
-  memory,
-  network,
-  condition,
-  ponderation,
-  agency,
-} from './data';
+import { os, storage, memory, network, condition, ponderation } from './data';
 
 import iphone from '../../assets/iphone.png';
 import Navbar from '../Navbar/Navbar';
@@ -30,6 +22,8 @@ function Evaluation() {
     condition: '',
     agency: '',
   });
+
+  const [optionAgency, setOptionAgency] = useState([]);
 
   const [price, setPrice] = useState(0);
 
@@ -55,6 +49,8 @@ function Evaluation() {
       .then((res) => setOptionBrand(res.data));
 
     axios.get(`${url}/evaluation`).then((res) => setOptionModel(res.data));
+
+    axios.get(`${url}/agencies`).then((res) => setOptionAgency(res.data));
   }, []);
 
   const handleClickToPageTwo = (e) => {
@@ -123,12 +119,11 @@ function Evaluation() {
       .catch((err) => console.log(err));
 
     navigate('/');
-
   };
 
   return (
     <>
-    <Navbar />
+      <Navbar />
       <form onSubmit={handleSubmit}>
         <section className='container first-page'>
           <p className='title'>
@@ -246,7 +241,7 @@ function Evaluation() {
                 <label htmlFor='agency'> Agence </label>
                 <select name='agency' id='agency' ref={agencyRef}>
                   <option value=''></option>
-                  {agency.map((a) => (
+                  {optionAgency.map((a) => (
                     <option key={a.id} value={a.id}>
                       {' '}
                       {a.name}{' '}
@@ -281,7 +276,7 @@ function Evaluation() {
               <button className='submit btn'>Valider</button>
             </div>
             <div className='right'>
-              <img src={iphone} alt='' />
+              <img src={iphone} alt='iphone' />
             </div>
           </div>
         </section>
