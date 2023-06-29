@@ -38,10 +38,7 @@ $color-yellow: #FCBD42;
         font-size: 18px;
         border-radius: 50px;
 }
-label {
-    display: block;
-    margin-bottom: 4px;
-}
+
 
 
 form  {
@@ -52,6 +49,10 @@ form  {
     align-items: center;
     margin: 0 auto;
     color: $color-select;
+    label {
+        display: block;
+        margin-bottom: 4px;
+    }
 
     .title {
         font-weight: bold;
