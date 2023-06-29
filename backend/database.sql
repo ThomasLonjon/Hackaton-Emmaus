@@ -89,7 +89,7 @@ COLLATE = utf8mb4_0900_ai_ci;
 CREATE TABLE IF NOT EXISTS `emmaus_db`.`users` (
   `id` INT(11) NOT NULL AUTO_INCREMENT,
   `email` VARCHAR(65) NOT NULL,
-  `password` VARCHAR(45) NOT NULL,
+  `password` VARCHAR(120) NOT NULL,
   `firstname` VARCHAR(45) NOT NULL,
   `lastname` VARCHAR(65) NOT NULL,
   `role` TINYINT(4) NOT NULL DEFAULT '0',

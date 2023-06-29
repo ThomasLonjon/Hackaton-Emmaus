@@ -1,7 +1,7 @@
 const argon = require("argon2");
 const jwt = require("jsonwebtoken");
 
-const { findAll, findById, insert, findByMail, updateOne, updateOneComment, deleteOne } = require("./model");
+const { findAll, findById, insert, findByMail, updateOne,  deleteOne } = require("./model");
 
 const getAll = ({ req, res }) => {
   findAll()
@@ -21,15 +21,15 @@ const getById = (req, res) => {
 };
 
 const register = async (req, res) => {
-  const { firstname, lastname, email, password, age } = req.body;
+  const { email,password,firstname,lastname,role,agency_id } = req.body;
   if (!email) {
     res.status(400).send({ error: "Please specify email" });
     return;
   }
 
   try {
-    const result = await insert({ firstname, lastname, email, password, age });
-    res.status(201).json({ id: result.insertId, firstname, lastname, email, age });
+    const result = await insert({email,password,firstname, lastname, role,agency_id });
+    res.status(201).json({ id: result.insertId, firstname, lastname, email, role });
   } catch (err) {
     console.error(err);
     res.status(500).send({
@@ -52,7 +52,7 @@ const login = async (req, res) => {
     } else {
       const { id, email, password: hash, role } = user;
       if (await argon.verify(hash, password)) {
-        const token = jwt.sign({ id: id, role: role }, process.env.JWT_AUTH_SECRET, {
+        const token = jwt.sign({ id: id, role: role , agency_id}, process.env.JWT_AUTH_SECRET, {
           expiresIn: "1h",
         });
         res
@@ -99,22 +99,8 @@ const updateUser = (req, res) => {
     });
 };
 
-const updateComment = (req, res) => {
-  const id = req.userId;
-  const comment = req.body;
-  updateOneComment(comment, id)
-    .then((comment) => {
-      if (comment.affectedRows === 1) {
-        res.status(204).json({ id, comment });
-      } else {
-        res.status(404).json("No user found with this ID");
-      }
-    })
-    .catch((err) => {
-      console.error(err);
-      res.status(500).json("error server");
-    });
-};
+
+    
 
 const deleteUser = (req, res) => {
   const { id } = req.params;
@@ -135,6 +121,5 @@ module.exports = {
   login,
   logout,
   updateUser,
-  updateComment,
   deleteUser,
 };
