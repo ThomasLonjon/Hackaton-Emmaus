@@ -96,7 +96,6 @@ function Phones() {
               .filter((item) =>
                 item?.name.toLowerCase().includes(search.toLowerCase())
               )
-              .reverse()
               .map((e) => {
                 return (
                   <tr>

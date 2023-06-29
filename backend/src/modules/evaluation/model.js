@@ -11,10 +11,10 @@ const findAllBrands = async () => {
 } 
 
 const insertEvaluation = async (evaluation) => {
-    const { ram, storage, network, os, condition, price, agency, brand } = evaluation;
+    const { ram, storage, network, os, condition, price, agency, model } = evaluation;
     const [data] = await db.query(
         "INSERT INTO evaluation (ram, storage, network, os, `condition`, price, agency_id, models_id) VALUES (?, ?, ?, ?, ?, ?, ?, ?)", 
-        [ram, storage, network, os, condition, price, agency, brand]
+        [ram, storage, network, os, condition, price, agency, model]
     );
     return data;
 };
