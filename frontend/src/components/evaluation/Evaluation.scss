@@ -62,11 +62,16 @@ form  {
         width: 70%;
         font-weight: 300;
 
-        select {
+        select, input {
             width: 100%;
             border-color: $color-select;
             border-radius: 5px;
             padding: 8px 4px;
+            outline: none;
+        }
+
+        input {
+            border: 1px solid $color-select;
         }
     }
     .next {

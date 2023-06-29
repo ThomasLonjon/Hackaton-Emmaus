@@ -2,7 +2,7 @@ import React, { useEffect, useState, useRef } from 'react'
 import "./Evaluation.scss";
 import axios from 'axios'
 
-import {os, storage, memory, network, condition} from './data'
+import {os, storage, memory, network, condition, ponderation} from './data'
 
 import iphone from '../../assets/iphone.png'
 
@@ -14,21 +14,29 @@ function Evaluation() {
         brand: "",
         model: "",
         os: "",
+        release_year: "",
         memory: "",
         storage: "",
         network: "",
         condition: "",
     })
 
+    const [price, setPrice] = useState(0)
+
     const url = import.meta.env.VITE_BACKEND_URL
+
+    
 
     const brandRef = useRef()
     const modelRef = useRef()
     const osRef = useRef()
+    const releaseRef = useRef()
     const memoryRef = useRef()
     const storageRef = useRef()
     const networkRef = useRef()
     const conditionRef = useRef()
+
+    console.log(ponderation);
 
     
 
@@ -62,10 +70,15 @@ function Evaluation() {
         secondPage.style.display = "none"
         thirdPage.style.display = "flex"
 
+        const INITIAL_PRICE = 50
+        const result = INITIAL_PRICE * ponderation.memory[memoryRef.current.value] * ponderation.storage[storageRef.current.value] * ponderation.release[releaseRef.current.value] * ponderation.condition[conditionRef.current.value] * ponderation.brand[brandRef.current.value]
+        setPrice(result.toFixed(2))
+
         setSmartphoneObj({
             brand: brandRef.current.value,
             model: modelRef.current.value,
             os: osRef.current.value,
+            release_year: releaseRef.current.value,
             memory: memoryRef.current.value,
             storage: storageRef.current.value,
             network: networkRef.current.value,
@@ -75,10 +88,6 @@ function Evaluation() {
 
     const handleSubmit = (e) => {
         e.preventDefault()
-
-        
-
-        
     }
 
   return (
@@ -115,6 +124,11 @@ function Evaluation() {
                         os.map((os, index) => <option key={os.name} value={os.name}> {os.name} </option>)
                     }
                 </select>
+            </div>
+
+            <div className="release select-container">
+                <label htmlFor="release"> Année de sortie </label>
+                <input type="number" min="1900" max="2099" step="1" ref={releaseRef}/>
             </div>
             <button className="next btn" onClick={handleClickToPageTwo} >Suivant</button>
         </section>
@@ -174,7 +188,7 @@ function Evaluation() {
             <div className="flex-container">
                 <div className="left">
                     <h2>Prix conseillé pour le <span className="smartphone">smartphone</span></h2>
-                    <p className="price">40 €</p>
+                    <p className="price">{price} €</p>
                     <div className="specs">
                         <p>Modèle: {smartphoneObj.model}</p>
                         <p>Ram: {smartphoneObj.memory}Go</p>
