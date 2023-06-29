@@ -1,8 +1,8 @@
-const { findAllAgenciesByPhoneId, findAll } = require("./model");
+const { findAgencyById, findAll } = require("./model");
 
-const getAllAgenciesByPhoneID = (req, res) => {
+const getAgencyByID = (req, res) => {
   const { id } = req.params;
-  findAllAgenciesByPhoneId(id)
+  findAgencyById(id)
     .then(([agencies]) => {
       res.status(200).json(agencies);
     })
@@ -18,6 +18,6 @@ const getAll = (req, res) => {
 };
 
 module.exports = {
-  getAllAgenciesByPhoneID,
+  getAgencyByID,
   getAll,
 };
