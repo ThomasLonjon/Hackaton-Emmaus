@@ -1,16 +1,21 @@
 import React from "react";
 import emmaus from '../images/emmaus.png'
 import "../App.scss"
+import hand from "../images/hand.png"
 
 function Home() {
  
    return (
+    <>
     <div className = "topbar">
         <div className = "topbar-first">
           <div className="topbar-second">
             <img src={emmaus} className="emmaus-logo" alt=""/>
             <button className ="connect">Se connecter </button>
             </div>
+            </div>
+            </div>
+            <div className ="block-home">
             <div className = "title-home">
               <div className="title-description">
              <h1>L'accès à la technologie<br/>
@@ -32,9 +37,11 @@ function Home() {
                 </div>
                 </div>
             </div>
-        </div>
-      
-    </div>
+            <div className ="emmaus-hand">
+              <img src={hand} className="dirty-hand" alt=""/>
+            </div>
+            </div>
+      </>
   )
 }
 
