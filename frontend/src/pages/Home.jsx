@@ -4,6 +4,7 @@ import "../App.scss"
 import hand from "../images/hand.png"
 
 function Home() {
+  
  
    return (
     <>
