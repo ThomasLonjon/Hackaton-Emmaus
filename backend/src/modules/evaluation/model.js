@@ -10,6 +10,8 @@ const findAllBrands = async () => {
     return brands
 } 
 
+
+
 module.exports = {
     findAllModels,
     findAllBrands
