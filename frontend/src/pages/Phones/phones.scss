@@ -1,0 +1,50 @@
+.phone-page {
+    display: flex;
+    .phones-container {
+        margin: 32px 100px;
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        div {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 24px;
+            h1 {
+                width: 50%;
+            }
+            .searchbar {
+                all: unset;
+                border-radius: 100px;
+                border: 1px solid grey;
+                padding: 4px 16px;
+                width: 50%;
+                height: 32px;
+              }
+        }
+        table {
+            border-collapse: collapse;
+            tr {
+                height: 40px;
+                &:nth-child(odd) {
+                    background-color: #F2F2F2;
+                }
+            }
+            th {
+                background-color: #FCBD42;
+            }
+            td {
+                text-align: center;
+                button {
+                    border: none;
+                    background-color: #6040ED;
+                    color: white;
+                    padding: 4px 8px;
+                    border-radius: 16px;
+
+                }
+            }
+        }
+
+    }
+}
