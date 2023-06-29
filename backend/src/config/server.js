@@ -10,12 +10,15 @@ app.use(cors({ origin: "http://localhost:5173" }));
 app.use(helmet());
 app.use(cookieParser());
 
-
 const user_rooter = require("../modules/user");
+const agency_rooter = require("../modules/agency");
+const phone_rooter = require("../modules/phones");
 const evaluation_rooter = require("../modules/evaluation");
 
+app.use("/users", user_rooter);
+app.use("/agencies", agency_rooter);
+app.use("/evaluation", evaluation_rooter);
+app.use("/phones", phone_rooter);
 
-// app.use("/users", user_rooter);
-app.use('/evaluation', evaluation_rooter)
 
 module.exports = app;

@@ -6,3 +6,79 @@
     box-sizing: border-box;
     font-family: Poppins;
 }
+
+.topbar-second {
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    border-bottom:1px solid gray
+}
+.connect{
+    border-radius:30px ;
+    width:200px;
+    text-align:center;
+    height:40px;
+    background-color:#6040ED;
+    padding-top:5px;
+    cursor:pointer;
+    color:white ;
+    font-weight:bold;
+}
+     .emmaus-logo{
+    width:100px;
+      }
+      .title-description{
+        margin-left:50px;
+      }
+      .para-title{
+        font-size:14px;
+        margin-left:50px;
+        margin-top:20px;
+      }
+    .hightlight{
+        color:#FCBD42;
+    } 
+      .title-home{
+        margin-left:100px;
+        padding-top:100px;
+       }
+
+       .home-button{
+        margin-top:50px;
+        margin-left:100px;
+       }
+
+
+
+    .home-btn-1{
+        border-radius:30px ;
+        width:200px;
+        text-align:center;
+        height:40px;
+        background-color:#6040ED;
+        padding-top:5px;
+        cursor:pointer;
+        font-weight:bold;
+        color:white ; 
+        outline : none ; 
+    }
+    .home-btn-2{
+        border-radius:30px ;
+        width:200px;
+        text-align:center;
+        height:40px;
+        background-color:#FCBD42;
+        padding-top:5px;
+        cursor:pointer;
+        margin-top:30px;
+        color:white;
+        font-weight:bold;
+        outline : none ; 
+    }
+    .block-home {
+        display:flex;
+    }
+    .emmaus-hand{
+        margin-top:100px;
+        margin-left:0
+    }

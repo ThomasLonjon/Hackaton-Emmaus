@@ -6,7 +6,7 @@
   "scripts": {
     "start": "nodemon src/app.js",
     "test": "jest",
-    "migrate":"node migrate.js"
+    "migrate": "node migrate.js"
   },
   "keywords": [],
   "author": "",
@@ -19,7 +19,8 @@
     "express": "^4.17.1",
     "helmet": "^7.0.0",
     "jsonwebtoken": "^9.0.0",
-    "mysql2": "^2.3.3"
+    "mysql2": "^2.3.3",
+    "sass": "^1.63.6"
   },
   "devDependencies": {
     "jest": "^26.0.1",

@@ -7,4 +7,5 @@ const { getAllModels, getAllBrands } = require('./controller')
 router.get('/', getAllModels)
 router.get('/brands', getAllBrands)
 
+
 module.exports = router;

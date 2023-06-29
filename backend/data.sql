@@ -1,6 +1,20 @@
 INSERT INTO emmaus_db.agency (name,location,lat,`long`,phone_number) VALUES
-	 ('Emmaus Leognan Bourg','Leognan',44.729,-0.600536,12),
-	 ('Wild Code Emmaus','Paris',48.8689,2.40597,15);
+	 ('Emmaus Leognan Bourg','Leognan',44.729,-0.600536,245875645),
+	 ('Wild Code Emmaus','Paris',48.8689,2.40597,167874567),
+	 ('Emmaus Buffay','Nantes',47.2149,-1.55447,298785467),
+	 ('Emmaus Hautepierre','Strasbourg',48.5911,7.70885,398678567),
+	 ('Emmaus Capitole','Toulouse',43.603,1.44345,509786512),
+	 ('Emmaus Croix Blanche','Tarbes',43.2345,0.0742576,587678976),
+	 ('Emmaus Wazemmes','Lille',50.6263,3.0493,378986765),
+	 ('Emmaus Lutin Bleu','Laon',49.5674,3.62602,398678971),
+	 ('Emmaus Noailles','Marseille',43.2936,5.37828,409786534),
+	 ('Emmaus Recouvrance','Brest',48.3854,-4.49338,298675438),
+	 ('Emmaus Saint-Maclou','Rouen',49.4402,1.09809,209678954),
+	 ('Emmaus des Arcades','Dijon',47.3208,5.04262,387907483),
+	 ('Emmaus Guillotière','Lyon',45.7552,4.84274,486745301),
+	 ('Emmaus Tête D''or','Metz',49.1169,6.17824,386467897),
+	 ('Emmaus Comédie','Montpellier',43.6089,3.87889,478654345);
+
 
 
 INSERT INTO emmaus_db.models (name,brand,release_year,picture) VALUES
