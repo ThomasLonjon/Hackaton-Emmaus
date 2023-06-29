@@ -17,7 +17,7 @@ function Navbar() {
         <Link to="/phones">
           <p>Nos smartphones</p>
         </Link>
-        <Link to="/network">
+        <Link to="/map">
           <p>Réseau Emmaus</p>
         </Link>
       </div>
