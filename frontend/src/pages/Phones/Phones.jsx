@@ -2,23 +2,26 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import Filter from "../../components/filters/Filter";
 import "./phones.scss";
-import cross from "../../assets/close.png"
+import cross from "../../assets/close.png";
 
 function Phones() {
   const [phones, setPhones] = useState([]);
   const [search, setSearch] = useState("");
   const [filteredPhones, setFilteredPhones] = useState([]);
   const [filters, setFilters] = useState([[], [], [], []]);
+  const [agency, setAgency] = useState();
+
+  useEffect(() => {
+    axios
+      .get("http://localhost:8000/users/me")
+      .then((result) => console.log(result.data));
+  }, []);
 
   useEffect(() => {
     axios
       .get("http://localhost:8000/phones")
       .then((result) => setPhones(result.data));
   }, []);
-
-  useEffect(() => {
-    console.log(phones);
-  }, [phones]);
 
   useEffect(() => {
     if (
@@ -90,7 +93,9 @@ function Phones() {
                   <td>{e["charger_in"] ? "Oui" : "Non"}</td>
                   <td>{e.price}</td>
                   <td>
-                    <button><img src={cross} alt="" /></button>
+                    <button>
+                      <img src={cross} alt="" />
+                    </button>
                   </td>
                 </tr>
               );

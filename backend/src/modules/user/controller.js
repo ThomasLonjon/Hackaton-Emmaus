@@ -1,7 +1,14 @@
 const argon = require("argon2");
 const jwt = require("jsonwebtoken");
 
-const { findAll, findById, insert, findByMail, updateOne,  deleteOne } = require("./model");
+const {
+  findAll,
+  findById,
+  insert,
+  findByMail,
+  updateOne,
+  deleteOne,
+} = require("./model");
 
 const getAll = ({ req, res }) => {
   findAll()
@@ -15,21 +22,32 @@ const getById = (req, res) => {
   const { id } = req.params;
   findById(id)
     .then(([user]) => {
-      !user ? res.status(400).json("ressource with the specified id does not exist") : res.status(200).json(user);
+      !user
+        ? res.status(400).json("ressource with the specified id does not exist")
+        : res.status(200).json(user);
     })
     .catch((err) => console.error(err));
 };
 
 const register = async (req, res) => {
-  const { email,password,firstname,lastname,role,agency_id } = req.body;
+  const { email, password, firstname, lastname, role, agency_id } = req.body;
   if (!email) {
     res.status(400).send({ error: "Please specify email" });
     return;
   }
 
   try {
-    const result = await insert({email,password,firstname, lastname, role,agency_id });
-    res.status(201).json({ id: result.insertId, firstname, lastname, email, role });
+    const result = await insert({
+      email,
+      password,
+      firstname,
+      lastname,
+      role,
+      agency_id,
+    });
+    res
+      .status(201)
+      .json({ id: result.insertId, firstname, lastname, email, role });
   } catch (err) {
     console.error(err);
     res.status(500).send({
@@ -50,11 +68,15 @@ const login = async (req, res) => {
     if (!user) {
       res.status(403).json("Invalid email");
     } else {
-      const { id, email, password: hash, role } = user;
+      const { id, email, password: hash, role, agency_id } = user;
       if (await argon.verify(hash, password)) {
-        const token = jwt.sign({ id: id, role: role , agency_id}, process.env.JWT_AUTH_SECRET, {
-          expiresIn: "1h",
-        });
+        const token = jwt.sign(
+          { id: id, role: role, agency_id },
+          process.env.JWT_AUTH_SECRET,
+          {
+            expiresIn: "1h",
+          }
+        );
         res
           .cookie("access_token", token, {
             httpOnly: true,
@@ -99,9 +121,6 @@ const updateUser = (req, res) => {
     });
 };
 
-
-    
-
 const deleteUser = (req, res) => {
   const { id } = req.params;
   deleteOne(id)
@@ -114,6 +133,15 @@ const deleteUser = (req, res) => {
     });
 };
 
+const getCurrentUser = async (req, res, next) => {
+  try {
+    const [user] = await findById(req.userId);
+    res.status(200).json(user);
+  } catch (err) {
+    next(err);
+  }
+};
+
 module.exports = {
   getAll,
   getById,
@@ -122,4 +150,5 @@ module.exports = {
   logout,
   updateUser,
   deleteUser,
+  getCurrentUser
 };
