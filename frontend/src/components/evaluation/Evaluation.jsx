@@ -77,6 +77,7 @@ function Evaluation() {
 
         const INITIAL_PRICE = 50
         const result = INITIAL_PRICE * ponderation.memory[memoryRef.current.value] * ponderation.storage[storageRef.current.value] * ponderation.release[releaseRef.current.value] * ponderation.condition[conditionRef.current.value] * ponderation.brand[brandRef.current.value]
+
         setPrice(result.toFixed(2))
 
         setSmartphoneObj({
@@ -103,6 +104,8 @@ function Evaluation() {
         
 
         navigate('/')
+
+        console.log(smartphoneObj, price);
     }
 
   return (
@@ -116,7 +119,7 @@ function Evaluation() {
                 <select name="brand" id="brand" ref={brandRef}>
                     <option value=""></option>
                     {
-                        optionBrand.map((brand, index) => <option key={index} value={index}> {brand.brand} </option>)
+                        optionBrand.map((brand, index) => <option key={index} value={index+1}> {brand.brand} </option>)
                     }
                 </select>
             </div>
