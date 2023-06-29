@@ -3,12 +3,11 @@
 .mapPage {
   height: 100vh;
   display: flex;
-  flex-direction: column;
-  justify-content: space-between;
+  justify-content: space-around;
 }
 
 .mapContainer {
-  width: 60vw;
+  width: 70vw;
   height: 70vh;
 }
 
@@ -28,5 +27,42 @@
 
 .map-table-container {
   display: flex;
+  flex-direction: column;
   justify-content: space-around;
+}
+
+table {
+  border-collapse: collapse;
+  tr {
+    height: 40px;
+    &:nth-child(odd) {
+      background-color: #f2f2f2;
+    }
+  }
+  th {
+    background-color: #fcbd42;
+  }
+  td {
+    text-align: center;
+    button {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: auto;
+      border: none;
+      background-color: #6040ed;
+      color: white;
+      height: 32px;
+      width: 32px;
+      border-radius: 50%;
+      img {
+        width: 16px;
+        height: 16px;
+      }
+    }
+  }
+}
+
+.maptableHidden {
+  display: none;
 }

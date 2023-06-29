@@ -5,30 +5,9 @@ import "./Map.scss";
 
 mapboxgl.accessToken = import.meta.env.VITE_MAPBOX_ACCESS_TOKEN;
 
-function Map({ agencies, phoneIsChosen, setClickedAgencyIndex }) {
+function Map({ setClickedAgencyIndex, filteredPhones, phones }) {
   const mapContainer = useRef(null);
   const map = useRef(null);
-
-  useEffect(() => {
-    const geojson = [];
-    if (phoneIsChosen) {
-      agencies.map((element) =>
-        geojson.push({
-          type: "Feature",
-          properties: { index: agencies.indexOf(element) },
-          geometry: {
-            type: "Point",
-            coordinates: [agencies[agencies.indexOf(element)].long, agencies[agencies.indexOf(element)].lat],
-          },
-        })
-      );
-
-      map.current.getSource("agencies").setData({
-        type: "FeatureCollection",
-        features: geojson,
-      });
-    }
-  }, [agencies]);
 
   // ---------------------------------------- Add map----------------------------------------
   useEffect(() => {
@@ -69,16 +48,9 @@ function Map({ agencies, phoneIsChosen, setClickedAgencyIndex }) {
       //   map.current.moveLayer("agencies", "country");
     });
 
-    // -------------------------------- popup --------------------------------
-
-    const popup = new mapboxgl.Popup({
-      closeButton: false,
-      closeOnClick: false,
-    });
-
     map.current.on("click", "agencies", (e) => {
-      const index = e.features[0].properties.index;
-      setClickedAgencyIndex(index);
+      const id = e.features[0].properties.agencyId;
+      setClickedAgencyIndex(parseInt(id));
     });
 
     map.current.on("mouseenter", "agencies", () => {
@@ -90,6 +62,26 @@ function Map({ agencies, phoneIsChosen, setClickedAgencyIndex }) {
       map.current.getCanvas().style.cursor = "";
     });
   }, []);
+
+  useEffect(() => {
+    const geojson = [];
+    if (filteredPhones.length !== phones.length) {
+      filteredPhones.map((element) => {
+        geojson.push({
+          type: "Feature",
+          properties: { agencyId: element.agency_id },
+          geometry: {
+            type: "Point",
+            coordinates: [element.long, element.lat],
+          },
+        });
+      });
+      map.current.getSource("agencies").setData({
+        type: "FeatureCollection",
+        features: geojson,
+      });
+    }
+  }, [filteredPhones]);
 
   // ---------------------------------------- RETURN----------------------------------------
 

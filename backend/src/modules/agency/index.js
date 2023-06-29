@@ -1,7 +1,7 @@
 const router = require("express").Router();
-const { getAllAgenciesByPhoneID, getAll } = require("./controller");
+const { getAgencyByID, getAll } = require("./controller");
 
+router.get("/:id", getAgencyByID);
 router.get("/", getAll);
-router.get("/:id", getAllAgenciesByPhoneID);
 
 module.exports = router;

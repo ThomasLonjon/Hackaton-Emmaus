@@ -1,14 +1,9 @@
 const db = require("../../config/db-config");
 
-const findAllAgenciesByPhoneId = (id) => {
-  return db
-    .execute(
-      "SELECT *, agency.name as agency_name FROM agency JOIN evaluation ON agency.id = evaluation.agency_id JOIN models ON models.id=evaluation.models_id WHERE models.id = ?",
-      [id]
-    )
-    .then((data) => {
-      return data;
-    });
+const findAgencyById = (id) => {
+  return db.execute("SELECT * FROM agency WHERE agency.id = ?", [id]).then((data) => {
+    return data;
+  });
 };
 
 const findAll = () => {
@@ -18,6 +13,6 @@ const findAll = () => {
 };
 
 module.exports = {
-  findAllAgenciesByPhoneId,
+  findAgencyById,
   findAll,
 };
