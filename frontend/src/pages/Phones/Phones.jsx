@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import Filter from "../../components/filters/Filter";
 import "./phones.scss";
+import cross from "../../assets/close.png"
 
 function Phones() {
   const [phones, setPhones] = useState([]);
@@ -42,37 +43,6 @@ function Phones() {
       })
     );
   }, [filters, phones]);
-
-  // useEffect(() => {
-  //   if (
-  //     filters[0].length == 0 &&
-  //     filters[1].length == 0 &&
-  //     filters[2].length == 0 &&
-  //     filters[3].length == 0
-  //   ) {
-  //     setFilteredPhones(phones);
-  //     return;
-  //   }
-  //   if (
-  //     filters[0].length ||
-  //     filters[1].length ||
-  //     filters[2].length ||
-  //     filters[3].length
-  //   ) {
-  //     setFilteredPhones(
-  //       phones.filter(
-  //         (e) =>
-  //           filters[0]?.some((f) => f === e.brand) &&
-  //           filters[1]?.some((g) => g = e.model) &&
-  //           filters[2]?.some((h) => f === e.ram) &&
-  //           filters[3]?.some((i) => g = e.storage)
-  //       )
-  //     );
-  //   }
-  //   if (phones.length) {
-  //     setFilteredPhones(phones);
-  //   }
-  // }, [filters, phones.length]);
 
   return (
     <div className="phone-page">
@@ -120,7 +90,7 @@ function Phones() {
                   <td>{e["charger_in"] ? "Oui" : "Non"}</td>
                   <td>{e.price}</td>
                   <td>
-                    <button>Vendre</button>
+                    <button><img src={cross} alt="" /></button>
                   </td>
                 </tr>
               );
