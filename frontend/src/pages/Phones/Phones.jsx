@@ -10,7 +10,18 @@ function Phones() {
   const [search, setSearch] = useState("");
   const [filteredPhones, setFilteredPhones] = useState([]);
   const [filters, setFilters] = useState([[], [], [], []]);
-  const [agency, setAgency] = useState();
+
+  const handleDelete = (id) => {
+    setFilteredPhones((prevPhones) =>
+      prevPhones.filter((phone) => phone.id !== id)
+    );
+  };
+
+  // const handleDelete = (id) => {
+  //   axios.delete('http://localhost:8000/users/')
+  // };
+
+
 
   useEffect(() => {
     axios
@@ -84,7 +95,8 @@ function Phones() {
             {filteredPhones
               .filter((item) =>
                 item?.name.toLowerCase().includes(search.toLowerCase())
-              ).reverse()
+              )
+              .reverse()
               .map((e) => {
                 return (
                   <tr>
@@ -96,7 +108,7 @@ function Phones() {
                     <td>{e["charger_in"] ? "Oui" : "Non"}</td>
                     <td>{e.price}</td>
                     <td>
-                      <button>
+                      <button onClick={() => handleDelete(e.id)}>
                         <img src={cross} alt="" />
                       </button>
                     </td>

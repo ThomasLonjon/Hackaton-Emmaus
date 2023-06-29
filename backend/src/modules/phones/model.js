@@ -21,7 +21,16 @@ const findById = (id) => {
     });
 };
 
+const deleteOne = (id) => {
+  return db
+    .execute("delete from evaluation where id = ?", [id])
+    .then(([result]) => {
+      return result;
+    });
+};
+
 module.exports = {
   findAll,
   findById,
+  deleteOne,
 };
