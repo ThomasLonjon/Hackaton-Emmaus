@@ -119,7 +119,7 @@ function Filter({ filters, setFilters }) {
         <div className="checkboxes">
           {brands.map((e) => {
             return (
-              <div>
+              <div key={brands.indexOf(e)}>
                 <input
                   type="checkbox"
                   name=""
@@ -144,7 +144,7 @@ function Filter({ filters, setFilters }) {
         <div className="checkboxes">
           {models.map((e) => {
             return (
-              <div>
+              <div key={models.indexOf(e)}>
                 <input
                   type="checkbox"
                   name=""
@@ -169,7 +169,7 @@ function Filter({ filters, setFilters }) {
         <div className="checkboxes">
           {ram.map((e) => {
             return (
-              <div>
+              <div key={ram.indexOf(e)}>
                 <input
                   type="checkbox"
                   name=""
@@ -194,7 +194,7 @@ function Filter({ filters, setFilters }) {
         <div className="checkboxes">
           {stockage.map((e) => {
             return (
-              <div>
+              <div key={stockage.indexOf(e)}>
                 <input
                   type="checkbox"
                   name=""
