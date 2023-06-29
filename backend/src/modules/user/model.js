@@ -9,7 +9,6 @@ const findAll = () => {
 const findById = (id) => {
   return db
     .query
-      // "SELECT * FROM user join user_has_tag on user_has_tag.user_id = user.id join tag on tag.id = user_has_tag.tag_id WHERE user.id = ? ",
       ('SELECT * from users where id = ? ',[id],
     )
     .then((data) => {

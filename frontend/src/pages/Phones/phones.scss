@@ -1,8 +1,9 @@
 .phone-page {
+    padding-top: 70px;
     display: flex;
     .phones-container {
         margin: 32px 100px;
-        width: 100%;
+        width: calc(100% - 280px);
         display: flex;
         flex-direction: column;
         div {
@@ -47,6 +48,7 @@
                         height: 32px;
                         width: 32px;
                         border-radius: 50%;
+                        cursor: pointer;
                         img {
                             width: 16px;
                             height: 16px;

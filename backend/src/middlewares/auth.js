@@ -24,6 +24,7 @@ const authenticate = async (req, res, next) => {
     const decoded = jwt.verify(token, process.env.JWT_AUTH_SECRET);
     req.userId = decoded.id;
     req.userRole = decoded.role;
+    req.agencyId = decoded.agency_id;
 
     next();
   } catch (error) {

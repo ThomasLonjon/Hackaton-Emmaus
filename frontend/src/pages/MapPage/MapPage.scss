@@ -1,14 +1,15 @@
 @import "../../App.scss";
 
 .mapPage {
-  height: 100vh;
+  padding-top: 70px;
   display: flex;
-  justify-content: space-around;
+  justify-content: space-between;
 }
 
 .mapContainer {
+  margin-right: 4vw;
   width: 70vw;
-  height: 70vh;
+  height: 68vh;
 }
 
 .setButton {
@@ -32,6 +33,7 @@
 }
 
 table {
+  width: 94.5%;
   border-collapse: collapse;
   tr {
     height: 40px;

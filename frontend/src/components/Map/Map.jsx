@@ -64,6 +64,7 @@ function Map({ setClickedAgencyIndex, filteredPhones, phones }) {
   }, []);
 
   useEffect(() => {
+
     const geojson = [];
     if (filteredPhones.length !== phones.length) {
       filteredPhones.map((element) => {

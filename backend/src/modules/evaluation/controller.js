@@ -1,4 +1,4 @@
-const { findAllModels, findAllBrands } = require("./model");
+const { findAllModels, findAllBrands, insertEvaluation } = require("./model");
 const argon = require("argon2");
 const jwt = require("jsonwebtoken");
 
@@ -20,7 +20,17 @@ const getAllBrands = async (req, res, next) => {
     }
 }
 
+const createEvaluation = async (req, res, next) => {
+ try {
+    const evaluation = await insertEvaluation(req.body)
+    res.status(201).json({ id:evaluation.insertId, ...req.body })
+ } catch (err) {
+    console.log(err);
+ }
+}
+
 module.exports = {
     getAllModels,
-    getAllBrands
+    getAllBrands,
+    createEvaluation
 }

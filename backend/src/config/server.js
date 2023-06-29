@@ -20,8 +20,4 @@ app.use("/agencies", agency_rooter);
 app.use("/evaluation", evaluation_rooter);
 app.use("/phones", phone_rooter);
 
-app.use("/evaluation", evaluation_rooter);
-app.use("/users", user_rooter);
-app.use("/phones", phone_rooter);
-
 module.exports = app;
