@@ -3,15 +3,7 @@ import './Evaluation.scss';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 
-import {
-  os,
-  storage,
-  memory,
-  network,
-  condition,
-  ponderation,
-  agency,
-} from './data';
+import { os, storage, memory, network, condition, ponderation } from './data';
 
 import iphone from '../../assets/iphone.png';
 import Navbar from '../Navbar/Navbar';
@@ -27,9 +19,12 @@ function Evaluation() {
     ram: '',
     storage: '',
     network: '',
+    charger_in:'',
     condition: '',
     agency: '',
   });
+
+  const [optionAgency, setOptionAgency] = useState([]);
 
   const [price, setPrice] = useState(0);
 
@@ -46,6 +41,7 @@ function Evaluation() {
   const networkRef = useRef();
   const conditionRef = useRef();
   const agencyRef = useRef();
+  const chargeurRef = useRef();
 
   console.log(optionModel);
 
@@ -55,6 +51,8 @@ function Evaluation() {
       .then((res) => setOptionBrand(res.data));
 
     axios.get(`${url}/evaluation`).then((res) => setOptionModel(res.data));
+
+    axios.get(`${url}/agencies`).then((res) => setOptionAgency(res.data));
   }, []);
 
   const handleClickToPageTwo = (e) => {
@@ -97,6 +95,7 @@ function Evaluation() {
       ram: memoryRef.current.value,
       storage: storageRef.current.value,
       network: networkRef.current.value,
+      charger_in: chargeurRef.current.checked,
       condition: conditionRef.current.value,
       agency: agencyRef.current.value,
     });
@@ -106,7 +105,7 @@ function Evaluation() {
     e.preventDefault();
     // faire le axios post
     //...
-    const { ram, storage, network, os, condition, model, agency } =
+    const { ram, storage, network, os, charger_in, condition, model, agency } =
       smartphoneObj;
     axios
       .post(`${url}/evaluation`, {
@@ -114,6 +113,7 @@ function Evaluation() {
         storage,
         network,
         os,
+        charger_in,
         condition,
         price,
         model,
@@ -122,13 +122,14 @@ function Evaluation() {
       .then((res) => console.log(res.data))
       .catch((err) => console.log(err));
 
-    navigate('/');
+      console.log(chargeurRef.current.checked);
 
+    navigate('/');
   };
 
   return (
     <>
-    <Navbar />
+      <Navbar />
       <form onSubmit={handleSubmit}>
         <section className='container first-page'>
           <p className='title'>
@@ -230,23 +231,33 @@ function Evaluation() {
                   ))}
                 </select>
               </div>
-              <div className='condition select-container'>
-                <label htmlFor='condition'> Etat </label>
-                <select name='condition' id='condition' ref={conditionRef}>
-                  <option value=''></option>
-                  {condition.map((a) => (
-                    <option key={a.id} value={a.name}>
-                      {' '}
-                      {a.name}{' '}
-                    </option>
-                  ))}
-                </select>
+              <div className='double-select select-container'>
+                <div className='sub-container-left'>
+                  <label htmlFor='condition' className='label-condition'> Etat: </label>
+                  <select name='condition' id='condition' ref={conditionRef}>
+                    <option value=''></option>
+                    {condition.map((a) => (
+                      <option key={a.id} value={a.name}>
+                        {' '}
+                        {a.name}{' '}
+                      </option>
+                    ))}
+                  </select>
+                </div>
+
+                <div className='sub-container-right'>
+                  <span>Chargeur: </span>
+                  <label className='switch'>
+                    <input type='checkbox' ref={chargeurRef}/>
+                    <span></span>
+                  </label>
+                </div>
               </div>
               <div className='agency select-container'>
                 <label htmlFor='agency'> Agence </label>
                 <select name='agency' id='agency' ref={agencyRef}>
                   <option value=''></option>
-                  {agency.map((a) => (
+                  {optionAgency.map((a) => (
                     <option key={a.id} value={a.id}>
                       {' '}
                       {a.name}{' '}
@@ -277,11 +288,12 @@ function Evaluation() {
                 <p>Ram: {smartphoneObj.ram}Go</p>
                 <p>Stockage: {smartphoneObj.storage}Go</p>
                 <p>Etat: {smartphoneObj.condition}</p>
+                {/* <p>Chargeur: {chsmartphoneObj.condition}</p> */}
               </div>
               <button className='submit btn'>Valider</button>
             </div>
             <div className='right'>
-              <img src={iphone} alt='' />
+              <img src={iphone} alt='iphone' />
             </div>
           </div>
         </section>
