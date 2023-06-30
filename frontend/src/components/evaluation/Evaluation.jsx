@@ -19,6 +19,7 @@ function Evaluation() {
     ram: '',
     storage: '',
     network: '',
+    charger_in:'',
     condition: '',
     agency: '',
   });
@@ -40,6 +41,7 @@ function Evaluation() {
   const networkRef = useRef();
   const conditionRef = useRef();
   const agencyRef = useRef();
+  const chargeurRef = useRef();
 
   console.log(optionModel);
 
@@ -93,6 +95,7 @@ function Evaluation() {
       ram: memoryRef.current.value,
       storage: storageRef.current.value,
       network: networkRef.current.value,
+      charger_in: chargeurRef.current.checked,
       condition: conditionRef.current.value,
       agency: agencyRef.current.value,
     });
@@ -102,7 +105,7 @@ function Evaluation() {
     e.preventDefault();
     // faire le axios post
     //...
-    const { ram, storage, network, os, condition, model, agency } =
+    const { ram, storage, network, os, charger_in, condition, model, agency } =
       smartphoneObj;
     axios
       .post(`${url}/evaluation`, {
@@ -110,6 +113,7 @@ function Evaluation() {
         storage,
         network,
         os,
+        charger_in,
         condition,
         price,
         model,
@@ -117,6 +121,8 @@ function Evaluation() {
       })
       .then((res) => console.log(res.data))
       .catch((err) => console.log(err));
+
+      console.log(chargeurRef.current.checked);
 
     navigate('/');
   };
@@ -225,17 +231,27 @@ function Evaluation() {
                   ))}
                 </select>
               </div>
-              <div className='condition select-container'>
-                <label htmlFor='condition'> Etat </label>
-                <select name='condition' id='condition' ref={conditionRef}>
-                  <option value=''></option>
-                  {condition.map((a) => (
-                    <option key={a.id} value={a.name}>
-                      {' '}
-                      {a.name}{' '}
-                    </option>
-                  ))}
-                </select>
+              <div className='double-select select-container'>
+                <div className='sub-container-left'>
+                  <label htmlFor='condition' className='label-condition'> Etat: </label>
+                  <select name='condition' id='condition' ref={conditionRef}>
+                    <option value=''></option>
+                    {condition.map((a) => (
+                      <option key={a.id} value={a.name}>
+                        {' '}
+                        {a.name}{' '}
+                      </option>
+                    ))}
+                  </select>
+                </div>
+
+                <div className='sub-container-right'>
+                  <span>Chargeur: </span>
+                  <label className='switch'>
+                    <input type='checkbox' ref={chargeurRef}/>
+                    <span></span>
+                  </label>
+                </div>
               </div>
               <div className='agency select-container'>
                 <label htmlFor='agency'> Agence </label>
@@ -272,6 +288,7 @@ function Evaluation() {
                 <p>Ram: {smartphoneObj.ram}Go</p>
                 <p>Stockage: {smartphoneObj.storage}Go</p>
                 <p>Etat: {smartphoneObj.condition}</p>
+                {/* <p>Chargeur: {chsmartphoneObj.condition}</p> */}
               </div>
               <button className='submit btn'>Valider</button>
             </div>

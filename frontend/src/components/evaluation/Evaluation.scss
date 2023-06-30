@@ -3,7 +3,7 @@ $color-purple: #6040ED;
 $color-yellow: #FCBD42;
 
 .container {
-    padding-top: 70px;
+    padding: 70px 20px 0 20px;
 
 }
 
@@ -135,6 +135,85 @@ form  {
             font-weight: 300;
             line-height: 1.5;
             text-align: center;
+        }
+    }
+}
+
+
+.double-select {
+    display: grid;
+    // justify-content: space-between;
+    grid-template-columns: repeat(2, 1fr);
+    align-items: center;
+    gap: 16px;
+    .sub-container-left {
+        display: flex;
+        align-items: center;
+        gap: 16px;
+        .label-condition {
+            display: inline;
+        }
+        select {
+            display: block;
+            width: 100%;
+        }
+    }
+    .sub-container-right {
+        display: flex;
+        align-items: center;
+        justify-content: space-around;
+        gap: 8px;
+        .switch {
+            display: inline-block;
+            position: relative;
+            width: 59px;
+            height: 29px;
+            cursor: pointer;
+            overflow: hidden;
+          }
+          .switch input {
+            position: absolute;
+            top: -30px;
+            top: -30px;
+            width: 0;
+            height: 0;
+          }
+          .switch input + span {
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: #99b4df;
+            border-radius: 20px;
+          }
+          .switch input + span:before {
+            content: "";
+            display: inline-block;
+            position: absolute;
+            top: 50%;
+            left: 4px;
+            width: 22px;
+            height: 22px;
+            background: white;
+            border-radius: 50%;
+            transform: translateY(-50%);
+            transition: all .5s;
+          }
+          .switch input:checked + span {
+            background: #346abf;
+          }
+          .switch input:checked + span:before {
+            left: 34px;
+          }
+    }
+}
+
+
+@media screen and (max-width: 768px) {
+    .flex-container {
+        .right img {
+            display: none;
         }
     }
 }
