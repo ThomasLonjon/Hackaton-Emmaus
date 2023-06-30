@@ -1,23 +1,39 @@
 export const os = [
   {
     id: 1,
-    name: 'Android 10',
+    name: "Android 9",
   },
   {
     id: 2,
-    name: 'Android 11',
+    name: "Android 10",
   },
   {
     id: 3,
-    name: 'iOS 14',
+    name: "Android 11",
   },
   {
     id: 4,
-    name: 'iOS 16',
+    name: "Android 12",
   },
   {
-    id: 4,
-    name: 'iOS 99',
+    id: 5,
+    name: "Android 13",
+  },
+  {
+    id: 6,
+    name: "iOS 13",
+  },
+  {
+    id: 7,
+    name: "iOS 14",
+  },
+  {
+    id: 8,
+    name: "iOS 15",
+  },
+  {
+    id: 9,
+    name: "iOS 16",
   },
 ];
 
@@ -78,26 +94,26 @@ export const storage = [
 export const network = [
   {
     id: 1,
-    network: '4G',
+    network: "4G",
   },
   {
     id: 2,
-    network: '5G',
+    network: "5G",
   },
 ];
 
 export const condition = [
   {
     id: 1,
-    name: 'Moyen',
+    name: "Moyen",
   },
   {
     id: 2,
-    name: 'Bon',
+    name: "Bon",
   },
   {
     id: 3,
-    name: 'Parfait',
+    name: "Parfait",
   },
 ];
 
@@ -152,5 +168,5 @@ export const agency = [
   {
     id: 3,
     name: "Emmaus Buffay",
-  }
-]
+  },
+];

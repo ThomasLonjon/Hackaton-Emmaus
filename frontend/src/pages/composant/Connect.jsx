@@ -56,6 +56,7 @@ function Connect({setOpenLogin}) {
                 Valider
               </button>
             </div>
+            {error && <p className="error">{error}</p>}
           </form>
         </div>
       </div>
